@@ -5,6 +5,7 @@ import { fetchMotorcycles, saveMotorcycle, deleteMotorcycle, uploadMotorcycleIma
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { PhotoLibrary } from './PhotoLibrary';
 import { toast, Toaster } from 'sonner';
+import imageCompression from 'browser-image-compression';
 
 interface AdminProps {
   onLogout: () => void;
@@ -114,9 +115,20 @@ export function Admin({ onLogout }: AdminProps) {
     if (!editingBike) return;
 
     setSaving(true);
-    toast.loading('Uploading image...', { id: 'upload' });
-    
-    const success = await uploadMotorcycleImage(editingBike.id, file);
+    toast.loading('Compressing & uploading image...', { id: 'upload' });
+
+    let fileToUpload = file;
+    try {
+      fileToUpload = await imageCompression(file, {
+        maxSizeMB: 0.5,
+        maxWidthOrHeight: 1600,
+        useWebWorker: true,
+      });
+    } catch (err) {
+      console.warn('Compression failed, uploading original:', err);
+    }
+
+    const success = await uploadMotorcycleImage(editingBike.id, fileToUpload);
     
     if (success) {
       toast.success('Image uploaded successfully!', { id: 'upload' });

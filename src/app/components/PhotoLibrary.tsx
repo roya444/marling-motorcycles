@@ -4,6 +4,7 @@ import { Upload, X, Trash2, Check, Image as ImageIcon, Folder, FolderPlus, Home,
 import { fetchPhotoLibrary, uploadPhotoToLibrary, deletePhotoFromLibrary, createFolder, movePhoto, type LibraryPhoto, type LibraryFolder } from '@/utils/supabase/photoLibrary';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { toast } from 'sonner';
+import imageCompression from 'browser-image-compression';
 
 interface PhotoLibraryProps {
   onSelectPhoto: (url: string, storagePath: string) => void;
@@ -87,9 +88,24 @@ export function PhotoLibrary({ onSelectPhoto, currentImageUrl, onClose }: PhotoL
         continue;
       }
 
-      toast.loading(`Uploading ${file.name}...`, { id: `upload-${i}` });
-      
-      const photo = await uploadPhotoToLibrary(file, currentFolder);
+      toast.loading(`Compressing & uploading ${file.name}...`, { id: `upload-${i}` });
+
+      let fileToUpload = file;
+      try {
+        fileToUpload = await imageCompression(file, {
+          maxSizeMB: 0.5,
+          maxWidthOrHeight: 1600,
+          useWebWorker: true,
+        });
+        const savedPct = Math.round((1 - fileToUpload.size / file.size) * 100);
+        if (savedPct > 0) {
+          console.log(`Compressed ${file.name}: ${(file.size/1024).toFixed(0)}KB → ${(fileToUpload.size/1024).toFixed(0)}KB (${savedPct}% smaller)`);
+        }
+      } catch (err) {
+        console.warn('Compression failed, uploading original:', err);
+      }
+
+      const photo = await uploadPhotoToLibrary(fileToUpload, currentFolder);
       
       if (photo) {
         uploadedPhotos.push(photo);
