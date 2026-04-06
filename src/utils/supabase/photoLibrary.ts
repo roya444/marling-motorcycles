@@ -23,7 +23,8 @@ export async function uploadPhotoToLibrary(file: File, folder?: string): Promise
     console.log('Uploading photo to library:', file.name, 'folder:', folder);
     
     const formData = new FormData();
-    formData.append('image', file);
+    formData.append('image', file, file.name);
+    formData.append('originalName', file.name);
     if (folder) {
       formData.append('folder', folder);
     }

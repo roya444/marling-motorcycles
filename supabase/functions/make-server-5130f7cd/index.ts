@@ -366,15 +366,16 @@ app.post("/make-server-5130f7cd/photo-library/upload", async (c) => {
       return c.json({ error: 'No image file provided' }, 400);
     }
     
-    console.log(`Uploading photo to library: ${file.name} in folder: ${folder || 'root'}`);
-    
+    const originalName = (formData.get('originalName') as string) || file.name || 'image.jpg';
+    console.log(`Uploading photo to library: ${originalName} in folder: ${folder || 'root'}`);
+
     // Read file as array buffer
     const arrayBuffer = await file.arrayBuffer();
     const buffer = new Uint8Array(arrayBuffer);
-    
+
     // Create unique file path with folder
-    const fileExtension = file.name.split('.').pop();
-    const fileName = file.name.replace(/\.[^/.]+$/, ''); // Remove extension
+    const fileExtension = originalName.split('.').pop() || 'jpg';
+    const fileName = originalName.replace(/\.[^/.]+$/, ''); // Remove extension
     const sanitizedFileName = fileName.replace(/[^a-zA-Z0-9-_]/g, '-'); // Sanitize
     const uniqueName = `${sanitizedFileName}-${Date.now()}.${fileExtension}`;
     const filePath = folder ? `${folder}/${uniqueName}` : uniqueName;
@@ -399,7 +400,7 @@ app.post("/make-server-5130f7cd/photo-library/upload", async (c) => {
       message: 'Photo uploaded successfully',
       path: uploadData.path,
       url: signedUrl || '',
-      name: file.name,
+      name: originalName,
       folder: folder,
     });
   } catch (error) {
