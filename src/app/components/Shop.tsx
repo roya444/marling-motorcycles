@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { motion } from 'motion/react';
 import { fetchMotorcycles, type Motorcycle } from '@/utils/supabase/motorcycles';
-import { seedMotorcycles } from '@/utils/supabase/seedMotorcycles';
 
 interface ShopProps {
   onViewBike: (bike: Motorcycle) => void;
@@ -14,7 +13,6 @@ export function Shop({ onViewBike, onNavigateAdmin }: ShopProps) {
   const [showForSale, setShowForSale] = useState(false);
   const [motorcycles, setMotorcycles] = useState<Motorcycle[]>([]);
   const [loading, setLoading] = useState(true);
-  const [seeding, setSeeding] = useState(false);
 
   // Fetch motorcycles from backend on component mount
   useEffect(() => {
@@ -26,13 +24,6 @@ export function Shop({ onViewBike, onNavigateAdmin }: ShopProps) {
     const bikes = await fetchMotorcycles();
     setMotorcycles(bikes);
     setLoading(false);
-  }
-
-  async function handleSeedDatabase() {
-    setSeeding(true);
-    await seedMotorcycles();
-    await loadMotorcycles();
-    setSeeding(false);
   }
 
   const filteredMotorcycles = motorcycles.filter(bike => {
@@ -75,23 +66,6 @@ export function Shop({ onViewBike, onNavigateAdmin }: ShopProps) {
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-5xl text-[#0A0A0A]">Our Collection</h1>
           
-          <div className="flex gap-3">
-            {motorcycles.length === 0 && (
-              <motion.button
-                onClick={handleSeedDatabase}
-                disabled={seeding}
-                className={`px-6 py-3 rounded-lg text-[#0A0A0A] font-bold transition-colors ${
-                  seeding
-                    ? 'bg-[#E5E5E5] cursor-not-allowed'
-                    : 'bg-[#FFC700] hover:bg-[#FFD700]'
-                }`}
-                whileHover={!seeding ? { scale: 1.05 } : {}}
-                whileTap={!seeding ? { scale: 0.95 } : {}}
-              >
-                {seeding ? 'Initializing Database...' : 'Initialize Database'}
-              </motion.button>
-            )}
-          </div>
         </div>
 
         {/* Filter Options */}
