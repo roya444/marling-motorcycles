@@ -90,13 +90,14 @@ export function PhotoLibrary({ onSelectPhoto, currentImageUrl, onClose }: PhotoL
 
       toast.loading(`Compressing & uploading ${file.name}...`, { id: `upload-${i}` });
 
-      let fileToUpload = file;
+      let fileToUpload: File = file;
       try {
-        fileToUpload = await imageCompression(file, {
+        const compressed = await imageCompression(file, {
           maxSizeMB: 0.5,
           maxWidthOrHeight: 1600,
           useWebWorker: true,
         });
+        fileToUpload = new File([compressed], file.name, { type: file.type || 'image/jpeg' });
         const savedPct = Math.round((1 - fileToUpload.size / file.size) * 100);
         if (savedPct > 0) {
           console.log(`Compressed ${file.name}: ${(file.size/1024).toFixed(0)}KB → ${(fileToUpload.size/1024).toFixed(0)}KB (${savedPct}% smaller)`);

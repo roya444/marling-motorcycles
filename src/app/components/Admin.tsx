@@ -117,13 +117,14 @@ export function Admin({ onLogout }: AdminProps) {
     setSaving(true);
     toast.loading('Compressing & uploading image...', { id: 'upload' });
 
-    let fileToUpload = file;
+    let fileToUpload: File = file;
     try {
-      fileToUpload = await imageCompression(file, {
+      const compressed = await imageCompression(file, {
         maxSizeMB: 0.5,
         maxWidthOrHeight: 1600,
         useWebWorker: true,
       });
+      fileToUpload = new File([compressed], file.name, { type: file.type || 'image/jpeg' });
     } catch (err) {
       console.warn('Compression failed, uploading original:', err);
     }
