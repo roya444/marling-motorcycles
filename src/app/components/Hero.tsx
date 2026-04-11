@@ -6,7 +6,7 @@ const heroVideo = 'https://res.cloudinary.com/dve2ivuns/video/upload/v1772645588
 const logoImg = 'https://res.cloudinary.com/dve2ivuns/image/upload/v1772646121/logo_neaz9k.png';
 
 interface HeroProps {
-  onNavigate: (page: 'home' | 'about' | 'shop' | 'admin') => void;
+  onNavigate: (page: 'home' | 'about' | 'shop' | 'workshop' | 'admin') => void;
   currentPage: string;
 }
 
@@ -64,6 +64,16 @@ export function Hero({ onNavigate, currentPage }: HeroProps) {
             whileTap={{ scale: 0.95 }}
           >
             Shop
+          </motion.button>
+          <motion.button
+            onClick={() => onNavigate('workshop')}
+            className={`text-white hover:text-[#FFC700] transition-colors font-['Roboto_Mono'] text-2xl ${
+              currentPage === 'workshop' ? 'underline decoration-[#FFC700]' : ''
+            }`}
+            whileHover={{ scale: 1.1, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Workshop
           </motion.button>
           <motion.button
             onClick={() => onNavigate('about')}

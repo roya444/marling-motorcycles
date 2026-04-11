@@ -5,10 +5,11 @@ import { Shop } from './components/Shop';
 import { BikeDetail } from './components/BikeDetail';
 import { Admin } from './components/Admin';
 import { AdminLogin } from './components/AdminLogin';
+import { Workshop } from './components/Workshop';
 import { type Motorcycle } from '@/utils/supabase/motorcycles';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'shop' | 'bike-detail' | 'admin'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'shop' | 'workshop' | 'bike-detail' | 'admin'>('home');
   const [selectedBike, setSelectedBike] = useState<Motorcycle | null>(null);
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
 
@@ -28,7 +29,7 @@ export default function App() {
     }
   }, []);
 
-  const handleNavigate = (page: 'home' | 'about' | 'shop' | 'admin') => {
+  const handleNavigate = (page: 'home' | 'about' | 'shop' | 'workshop' | 'admin') => {
     setCurrentPage(page);
     setSelectedBike(null);
     
@@ -75,6 +76,7 @@ export default function App() {
 
       {/* Page Content */}
       {currentPage === 'about' && <About />}
+      {currentPage === 'workshop' && <Workshop />}
       {currentPage === 'shop' && <Shop onViewBike={handleViewBike} onNavigateAdmin={() => handleNavigate('admin')} />}
       {currentPage === 'bike-detail' && selectedBike && (
         <BikeDetail bike={selectedBike} onBack={handleBackToShop} />
