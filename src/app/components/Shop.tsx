@@ -62,9 +62,9 @@ export function Shop({ onViewBike, onNavigateAdmin }: ShopProps) {
 
   return (
     <div className="min-h-screen bg-[#F5F5F5]">
-      <div className="max-w-7xl mx-auto px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 py-10 sm:px-8 sm:py-16">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-5xl text-[#0A0A0A]">Our Collection</h1>
+          <h1 className="text-3xl sm:text-5xl text-[#0A0A0A]">Our Collection</h1>
           
         </div>
 

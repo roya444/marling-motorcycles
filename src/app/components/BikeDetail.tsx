@@ -27,7 +27,7 @@ export function BikeDetail({ bike, onBack }: BikeDetailProps) {
       transition={{ duration: 0.5 }}
     >
       {/* Back Button */}
-      <div className="pt-8 pl-8 pb-8">
+      <div className="pt-6 pl-4 pb-6 sm:pt-8 sm:pl-8 sm:pb-8">
         <motion.button
           onClick={onBack}
           className="flex items-center gap-2 text-white hover:text-[#FFC700] transition-colors"
@@ -40,7 +40,7 @@ export function BikeDetail({ bike, onBack }: BikeDetailProps) {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-8 pb-16">
+      <div className="max-w-7xl mx-auto px-4 pb-12 sm:px-8 sm:pb-16">
         {/* Bike Image */}
         <motion.div
           className="mb-12"
@@ -51,18 +51,18 @@ export function BikeDetail({ bike, onBack }: BikeDetailProps) {
           <ImageWithFallback
             src={allImages[selectedImage]}
             alt={bike.name}
-            className="w-full h-[500px] object-contain"
+            className="w-full h-[280px] sm:h-[400px] md:h-[500px] object-contain"
           />
         </motion.div>
 
         {/* Image Gallery Thumbnails */}
         {allImages.length > 1 && (
-          <div className="flex gap-4 mb-12 justify-center">
+          <div className="flex gap-2 sm:gap-4 mb-8 sm:mb-12 justify-center flex-wrap">
             {allImages.map((img, index) => (
               <motion.button
                 key={index}
                 onClick={() => setSelectedImage(index)}
-                className={`w-24 h-24 border-2 ${
+                className={`w-16 h-16 sm:w-24 sm:h-24 border-2 ${
                   selectedImage === index ? 'border-[#FFC700]' : 'border-white/20'
                 } overflow-hidden`}
                 whileHover={{ scale: 1.05 }}
@@ -86,8 +86,8 @@ export function BikeDetail({ bike, onBack }: BikeDetailProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h1 className="text-5xl font-bold text-white mb-4">{bike.name}</h1>
-          <p className="text-3xl text-[#FFC700] mb-6">{bike.price}</p>
+          <h1 className="text-3xl sm:text-5xl font-bold text-white mb-4">{bike.name}</h1>
+          <p className="text-2xl sm:text-3xl text-[#FFC700] mb-6">{bike.price}</p>
           {bike.description && (
             <p className="text-white/80 text-lg max-w-3xl mx-auto whitespace-pre-line">
               {bike.description}

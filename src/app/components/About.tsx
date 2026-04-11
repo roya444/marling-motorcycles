@@ -1,19 +1,19 @@
 import React from 'react';
 
-const img1 = 'https://res.cloudinary.com/dve2ivuns/image/upload/v1772646122/about-img1_pllcjk.jpg';
+const img1 = '/about-img1.jpg';
 const img2 = 'https://res.cloudinary.com/dve2ivuns/image/upload/v1772646122/about-img2_wvdfkc.jpg';
 const img3 = 'https://res.cloudinary.com/dve2ivuns/image/upload/v1772646122/about-img3_shcbax.jpg';
 
 export function About() {
   return (
     <div className="min-h-screen bg-[#F5F5F5]">
-      <div className="max-w-[1088px] mx-auto px-8 py-20">
-        <h1 className="text-[32px] font-['Roboto_Mono'] font-medium mb-[72px] text-[#0A0A0A]">About Marling Motorcycles</h1>
-        
+      <div className="max-w-[1088px] mx-auto px-4 py-12 sm:px-8 sm:py-20">
+        <h1 className="text-2xl sm:text-[32px] font-['Roboto_Mono'] font-medium mb-10 sm:mb-[72px] text-[#0A0A0A]">About Marling Motorcycles</h1>
+
         {/* Text Content Box */}
-        <div className="bg-white p-8 rounded-[10px] mb-6">
+        <div className="bg-white p-5 sm:p-8 rounded-[10px] mb-6">
           <div className="flex flex-col gap-6 items-center text-center">
-            <p className="font-['Inter'] text-lg leading-[29.25px] tracking-[-0.44px] text-[rgba(8,9,11,0.8)] max-w-[756px]">
+            <p className="font-['Roboto_Mono'] text-base sm:text-lg leading-[29.25px] tracking-[-0.44px] text-[rgba(8,9,11,0.8)] max-w-[756px]">
               At Marling Motorcycles we have been riding, maintaining, and customising bikes for twenty five years. We like to strip a bike down to its chassis and rebuild it different and better!
               <br /><br />
               With our background in industrial design, we know that functionality comes first- a bike has to ride, handle and feel right. The rider needs to know that he is on something special.
@@ -22,43 +22,40 @@ export function About() {
               <br /><br />
               We invite you to take a look at our gallery and hope you will agree - our Bikes are different. Each one individually designed, built and finished- unique, quirky and beautifully put together.
             </p>
-            <p className="font-['Roboto_Mono'] font-bold text-lg leading-[29.25px] tracking-[-0.44px] text-[rgba(8,9,11,0.8)] max-w-[422px]">
-              Marling Motorycles - it is about so much more than just transport.
-            </p>
           </div>
         </div>
 
-        {/* Images in a row */}
-        <div className="flex gap-4 pb-8">
+        {/* Images - row on desktop, stack on mobile */}
+        <div className="flex flex-col sm:flex-row gap-4 pb-8">
           <div className="flex-1">
             <img
               src={img1}
               alt="Marling Motorcycle 1"
-              className="w-full h-full rounded-[10px] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] object-cover"
+              className="w-full h-48 sm:h-full rounded-[10px] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] object-cover"
             />
           </div>
           <div className="flex-1">
             <img
               src={img2}
               alt="Marling Motorcycle 2"
-              className="w-full h-full rounded-[10px] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] object-cover"
+              className="w-full h-48 sm:h-full rounded-[10px] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] object-cover"
             />
           </div>
           <div className="flex-1">
             <img
               src={img3}
               alt="Marling Motorcycle 3"
-              className="w-full h-full rounded-[10px] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] object-cover"
+              className="w-full h-48 sm:h-full rounded-[10px] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] object-cover"
             />
           </div>
         </div>
 
         {/* Contact Section */}
-        <div className="border-t border-[#CCCCCC] pt-10">
-          <h2 className="text-[32px] font-['Roboto_Mono'] font-medium mb-[56px] text-[#0A0A0A]">Get in Touch</h2>
+        <div className="border-t border-[#CCCCCC] pt-8 sm:pt-10">
+          <h2 className="text-2xl sm:text-[32px] font-['Roboto_Mono'] font-medium mb-8 sm:mb-[56px] text-[#0A0A0A]">Get in Touch</h2>
 
-          <div className="bg-white p-8 rounded-[10px]">
-            <div className="flex gap-6">
+          <div className="bg-white p-5 sm:p-8 rounded-[10px]">
+            <div className="flex flex-col sm:flex-row gap-6">
               {/* Left side - Workshop, Phone, Email */}
               <div className="flex-1 space-y-8">
                 <div>

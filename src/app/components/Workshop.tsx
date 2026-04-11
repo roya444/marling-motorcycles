@@ -32,8 +32,8 @@ export function Workshop() {
 
   return (
     <div className="min-h-screen bg-[#F5F5F5]">
-      <div className="max-w-7xl mx-auto px-8 py-20">
-        <h1 className="text-[32px] font-['Roboto_Mono'] font-medium mb-4 text-[#0A0A0A]">In the Workshop</h1>
+      <div className="max-w-7xl mx-auto px-4 py-12 sm:px-8 sm:py-20">
+        <h1 className="text-2xl sm:text-[32px] font-['Roboto_Mono'] font-medium mb-4 text-[#0A0A0A]">In the Workshop</h1>
         <p className="font-['Inter'] text-lg text-[rgba(8,9,11,0.8)] mb-12 max-w-[756px]">
           A look at what we're currently working on — bikes being stripped down, rebuilt, and brought back to life.
         </p>
@@ -80,7 +80,7 @@ export function Workshop() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-8 cursor-pointer"
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 sm:p-8 cursor-pointer"
           onClick={() => setSelectedPhoto(null)}
         >
           <motion.img
