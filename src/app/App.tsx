@@ -19,6 +19,11 @@ export default function App() {
     setIsAdminAuthenticated(isAuth);
   }, []);
 
+  // Scroll to top on page change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
+
   // Check URL for admin route
   useEffect(() => {
     const path = window.location.pathname;

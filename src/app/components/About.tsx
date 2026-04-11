@@ -1,7 +1,7 @@
 import React from 'react';
 
 const img1 = '/about-img1.jpg';
-const img2 = 'https://res.cloudinary.com/dve2ivuns/image/upload/v1772646122/about-img2_wvdfkc.jpg';
+const img2 = '/about-img2.jpg';
 const img3 = 'https://res.cloudinary.com/dve2ivuns/image/upload/v1772646122/about-img3_shcbax.jpg';
 
 export function About() {
